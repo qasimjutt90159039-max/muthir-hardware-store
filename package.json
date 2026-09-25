@@ -6,6 +6,7 @@
     "server": "cd server && npm start",
     "server:dev": "cd server && npm run dev",
     "seed": "cd server && npm run seed",
+    "build": "cd client && npm install && npm run build",
     "client": "cd client && npm run dev",
     "client:build": "cd client && npm run build"
   },
