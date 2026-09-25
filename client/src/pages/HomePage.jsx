@@ -44,9 +44,19 @@ const HomePage = () => {
           api.get('/guides'),
         ]);
 
-        setCategories(catRes.data);
-        setCollections(colRes.data);
-        setGuides(guideRes.data.slice(0, 3));
+        setCategories(Array.isArray(catRes.data) ? catRes.data : []);
+        setCollections(
+          colRes.data && typeof colRes.data === 'object' && Array.isArray(colRes.data.featured)
+            ? colRes.data
+            : {
+                featured: [],
+                powerTools: [],
+                handTools: [],
+                newArrivals: [],
+                bestSellers: [],
+              }
+        );
+        setGuides(Array.isArray(guideRes.data) ? guideRes.data.slice(0, 3) : []);
       } catch (err) {
         console.error('Failed to load homepage data:', err);
       } finally {
@@ -200,7 +210,7 @@ const HomePage = () => {
           <ProductGridSkeleton count={4} />
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {collections.featured.slice(0, 4).map((product) => (
+            {(collections?.featured || []).slice(0, 4).map((product) => (
               <ProductCard key={product._id} product={product} />
             ))}
           </div>
@@ -299,7 +309,7 @@ const HomePage = () => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {collections.powerTools.slice(0, 4).map((product) => (
+            {(collections?.powerTools || []).slice(0, 4).map((product) => (
               <ProductCard key={product._id} product={product} />
             ))}
           </div>
@@ -330,7 +340,7 @@ const HomePage = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {collections.handTools.slice(0, 4).map((product) => (
+          {(collections?.handTools || []).slice(0, 4).map((product) => (
             <ProductCard key={product._id} product={product} />
           ))}
         </div>
@@ -392,7 +402,7 @@ const HomePage = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {collections.bestSellers.slice(0, 4).map((product) => (
+          {(collections?.bestSellers || []).slice(0, 4).map((product) => (
             <ProductCard key={product._id} product={product} />
           ))}
         </div>
@@ -423,7 +433,7 @@ const HomePage = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {guides.map((g) => (
+            {(guides || []).map((g) => (
               <Link
                 key={g._id}
                 to={`/hardware-guides/${g.slug}`}

@@ -42,8 +42,8 @@ const ShopPage = () => {
           api.get('/categories'),
           api.get('/brands'),
         ]);
-        setCategories(catRes.data);
-        setBrands(brandRes.data);
+        setCategories(Array.isArray(catRes.data) ? catRes.data : []);
+        setBrands(Array.isArray(brandRes.data) ? brandRes.data : []);
       } catch (err) {
         console.error('Failed to load filter metadata:', err);
       }
@@ -61,9 +61,9 @@ const ShopPage = () => {
         params.set('pageSize', '12');
 
         const { data } = await api.get(`/products?${params.toString()}`);
-        setProducts(data.products);
-        setTotalPages(data.pages);
-        setTotalProducts(data.totalProducts);
+        setProducts(Array.isArray(data?.products) ? data.products : []);
+        setTotalPages(data?.pages || 1);
+        setTotalProducts(data?.total || (Array.isArray(data?.products) ? data.products.length : 0));
       } catch (err) {
         console.error('Failed to load products:', err);
       } finally {

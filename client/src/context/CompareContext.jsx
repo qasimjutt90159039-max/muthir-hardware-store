@@ -5,8 +5,12 @@ const CompareContext = createContext(null);
 
 export const CompareProvider = ({ children }) => {
   const [compareItems, setCompareItems] = useState(() => {
-    const saved = localStorage.getItem('mhs_compare');
-    return saved ? JSON.parse(saved) : [];
+    try {
+      const saved = localStorage.getItem('mhs_compare');
+      return saved ? JSON.parse(saved) : [];
+    } catch (_) {
+      return [];
+    }
   });
   const { success, warning } = useToast();
 

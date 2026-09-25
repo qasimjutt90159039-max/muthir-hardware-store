@@ -13,7 +13,7 @@ const BrandsPage = () => {
       try {
         setLoading(true);
         const { data } = await api.get('/brands');
-        setBrands(data);
+        setBrands(Array.isArray(data) ? data : []);
       } catch (err) {
         console.error('Failed to load brands:', err);
       } finally {
@@ -47,7 +47,7 @@ const BrandsPage = () => {
 
       {/* Brand Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {brands.map((b) => (
+        {(brands || []).map((b) => (
           <Link
             key={b._id}
             to={`/shop?brand=${encodeURIComponent(b.name)}`}

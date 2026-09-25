@@ -48,7 +48,7 @@ const CategoryPage = () => {
         }
 
         const { data } = await api.get(url);
-        setProducts(data.products);
+        setProducts(Array.isArray(data?.products) ? data.products : (Array.isArray(data) ? data : []));
       } catch (err) {
         console.error('Failed to load category products:', err);
       } finally {

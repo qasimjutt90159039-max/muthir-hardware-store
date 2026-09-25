@@ -13,7 +13,7 @@ const HardwareGuidesPage = () => {
       try {
         setLoading(true);
         const { data } = await api.get('/guides');
-        setGuides(data);
+        setGuides(Array.isArray(data) ? data : []);
       } catch (err) {
         console.error('Failed to load hardware guides:', err);
       } finally {
@@ -47,7 +47,7 @@ const HardwareGuidesPage = () => {
 
       {/* Guide Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {guides.map((g) => (
+        {(guides || []).map((g) => (
           <Link
             key={g._id}
             to={`/hardware-guides/${g.slug}`}

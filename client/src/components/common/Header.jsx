@@ -56,7 +56,7 @@ const Header = () => {
       try {
         setIsSearching(true);
         const { data } = await api.get(`/products/suggestions?q=${encodeURIComponent(searchQuery.trim())}`);
-        setSuggestions(data);
+        setSuggestions(Array.isArray(data) ? data : []);
         setShowSuggestions(true);
       } catch (err) {
         console.error('Search suggestion error:', err);

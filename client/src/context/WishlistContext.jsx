@@ -7,8 +7,12 @@ const WishlistContext = createContext(null);
 
 export const WishlistProvider = ({ children }) => {
   const [wishlist, setWishlist] = useState(() => {
-    const saved = localStorage.getItem('mhs_wishlist');
-    return saved ? JSON.parse(saved) : [];
+    try {
+      const saved = localStorage.getItem('mhs_wishlist');
+      return saved ? JSON.parse(saved) : [];
+    } catch (_) {
+      return [];
+    }
   });
   const { user } = useAuth();
   const { success } = useToast();

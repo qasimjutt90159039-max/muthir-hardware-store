@@ -6,12 +6,20 @@ const CartContext = createContext(null);
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState(() => {
-    const saved = localStorage.getItem('mhs_cart');
-    return saved ? JSON.parse(saved) : [];
+    try {
+      const saved = localStorage.getItem('mhs_cart');
+      return saved ? JSON.parse(saved) : [];
+    } catch (_) {
+      return [];
+    }
   });
   const [coupon, setCoupon] = useState(() => {
-    const saved = localStorage.getItem('mhs_coupon');
-    return saved ? JSON.parse(saved) : null;
+    try {
+      const saved = localStorage.getItem('mhs_coupon');
+      return saved ? JSON.parse(saved) : null;
+    } catch (_) {
+      return null;
+    }
   });
   const { success, warning, error: toastError } = useToast();
 
