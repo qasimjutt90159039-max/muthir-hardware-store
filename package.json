@@ -2,11 +2,16 @@
   "name": "mutahir-hardware-store",
   "version": "1.0.0",
   "description": "Production E-Commerce Platform for Mutahir Hardware Store, Multan",
+  "private": true,
+  "workspaces": [
+    "client",
+    "server"
+  ],
   "scripts": {
+    "build": "cd client && npm install && npm run build",
     "server": "cd server && npm start",
     "server:dev": "cd server && npm run dev",
     "seed": "cd server && npm run seed",
-    "build": "cd client && (chmod -R 755 node_modules/.bin 2>/dev/null || true) && npm run build",
     "client": "cd client && npm run dev",
     "client:build": "cd client && npm run build"
   },
