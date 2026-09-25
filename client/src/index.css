@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-sans bg-brand-bgLight text-brand-black;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply tracking-tight font-heading font-bold uppercase;
+  }
+}
+
+/* Custom Industrial Hardware Styling */
+.workshop-pattern {
+  background-color: #111111;
+  background-image: radial-gradient(rgba(249, 115, 22, 0.15) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+.industrial-grid {
+  background-size: 30px 30px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+}
+
+.hazard-stripes {
+  background: repeating-linear-gradient(
+    -45deg,
+    #f97316,
+    #f97316 10px,
+    #111111 10px,
+    #111111 20px
+  );
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c2410c;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ea580c;
+}

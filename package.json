@@ -1,0 +1,24 @@
+{
+  "name": "mutahir-hardware-store",
+  "version": "1.0.0",
+  "description": "Production E-Commerce Platform for Mutahir Hardware Store, Multan",
+  "scripts": {
+    "server": "cd server && npm start",
+    "server:dev": "cd server && npm run dev",
+    "seed": "cd server && npm run seed",
+    "client": "cd client && npm run dev",
+    "client:build": "cd client && npm run build"
+  },
+  "keywords": [
+    "hardware",
+    "tools",
+    "multan",
+    "ecommerce",
+    "react",
+    "node",
+    "mongodb",
+    "industrial"
+  ],
+  "author": "Mutahir Hardware Store",
+  "license": "ISC"
+}
